@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Road : MonoBehaviour
 {
+    [Header("Player Transform")]
     [SerializeField] private Transform playerBall;
+    
     private float _initialBallScale;
     private float _initialRoadWidth;
 

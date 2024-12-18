@@ -1,10 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EndDoor : MonoBehaviour
 {
+    [Header("Events")]
+    [SerializeField] private UnityEvent onWin;
+    
+    [Header("Player Transform")]
     [SerializeField] private Transform playerBall;
+
+    [Header("Settings")]
+    [SerializeField] private float yDestination = 3.0f;
     [SerializeField] private float openDistance = 5.0f;
 
     private bool _isOpen = false;
@@ -20,6 +26,13 @@ public class EndDoor : MonoBehaviour
     private void OpenDoor()
     {
         _isOpen = true;
-        transform.Translate(Vector3.up * 3.0f);
+        transform.Translate(Vector3.up * yDestination);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.TryGetComponent(out PlayerBall ball)) return;
+        
+        onWin?.Invoke();
     }
 }
